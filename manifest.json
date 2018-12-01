@@ -1,0 +1,36 @@
+{
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAroK7JuB7n9nHZ7XcYhQldvwybC1TbUu0UTjSWXTPyAIw6F0ofkZOztU7bOULJvcjs3IGAMizfsepb6EkC4Ueo7S2o0KtrApS006lW3cg7Qh/sTK8k0jl++etPs8jXha6i+pK+7qXvABAdadMbAv9geYnYG/SQu5sf2Vdr9cYaxxmY9Iss16/W64VGih4Mm/tSoenBj3I6oQZi0RVoD9i2/NWjaaMxHwb5/ci9CsMqWjrcgf9Cm7D0lNCM74WEd8NSAge4aS9mw2iJLms2avrWUJyI5tUCHd3tz0N8/Nt/RhnEqhh6yGOGGwUnwiMOmvXxblj9FuoD4481EInAaYmrwIDAQAB",
+  "manifest_version": 2,
+  "name": "Ez Remote",
+  "description": "This extension is a starting point to create a real Chrome extension",
+  "version": "0.0.1",
+  "oauth2": {
+    "client_id": "1053574179291-ih36ejj4gduf6km9jlad61iq80qgcsv8.apps.googleusercontent.com",
+    "scopes":["profile"]
+  },
+  "background": {
+    "scripts": ["third_party/jquery.min.js", "background/index.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "js": ["third_party/jquery.min.js", "content_scripts/youtube.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "options_page": "index.html",
+  "icons": {
+    "16": "logo-small.svg",
+    "48": "logo-small.svg",
+    "128": "logo-small.svg"
+  },
+  "permissions": [
+    "tabs",
+    "http://*.youtube.com/", "https://*.youtube.com/", "identity",
+    "https://ezmote.auth.ap-northeast-2.amazoncognito.com/*"
+
+  ]
+}
