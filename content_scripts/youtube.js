@@ -27493,23 +27493,29 @@ return jQuery;
   }, false);
   // window.postMessage({ fn: 'fn', args: ['arg'] }, "*");
 })();
-  `,(document.head||document.documentElement).appendChild(a)}function registerListener(){window.addEventListener("message",a=>{if(a.source===window){const b=a.data;"respYoutubeCommand"!==b.command||(console.log("resolved",b),resolverIdMap[b.id](b.result),delete resolverIdMap[b.id])}},!1)}injectScript(),registerListener();function executeYoutubeFunction(a,...b){b=b||[];const c=callId++;return window.postMessage({id:c,command:"executeYoutubeCommand",fn:a,args:b},"*"),new Promise(a=>{resolverIdMap[c]=a})}function showResponse(){const a=(0,_jquery.default)("<div style=\"width: 100%; height: 16px; background: red\"></div>");(0,_jquery.default)("#movie_player").after(a),a.animate({opacity:0},500,()=>{a.remove()})}chrome.runtime.onMessage.addListener(function(a){const b=a.request;if(b.startsWith(`${_constants.NAME}_`)){if(b.endsWith("_COMMAND"))switch(showResponse(),a.body.command){case"forward":executeYoutubeFunction("seekBy",a.body.amount);break;case"backward":executeYoutubeFunction("seekBy",-a.body.amount);break;case"next":executeYoutubeFunction("nextVideo");}updateWatch()}});async function updateWatch(){const a=(0,_jquery.default)("h1.title").text(),b=window.location.href,c=await executeYoutubeFunction("getCurrentTime");_lodash.default.isEmpty(a)||chrome.runtime.sendMessage({request:"UPDATE_WATCH",body:{title:a,url:b,timestamp:c}},function(a){console.log(a)})}updateWatch(),setInterval(()=>{updateWatch()},1e4),window.addEventListener("popstate",()=>setTimeout(()=>updateWatch(),100));
+  `,(document.head||document.documentElement).appendChild(a)}function registerListener(){window.addEventListener("message",a=>{if(a.source===window){const b=a.data;"respYoutubeCommand"!==b.command||(console.log("resolved",b),resolverIdMap[b.id](b.result),delete resolverIdMap[b.id])}},!1)}injectScript(),registerListener();function executeYoutubeFunction(a,...b){b=b||[];const c=callId++;return window.postMessage({id:c,command:"executeYoutubeCommand",fn:a,args:b},"*"),new Promise(a=>{resolverIdMap[c]=a})}function showResponse(){const a=(0,_jquery.default)("<div style=\"width: 100%; height: 16px; background: red\"></div>");(0,_jquery.default)("#movie_player").after(a),a.animate({opacity:0},500,()=>{a.remove()})}chrome.runtime.onMessage.addListener(function(a){const b=a.request;if(b.startsWith(`${_constants.NAME}_`)){if(b.endsWith("_COMMAND"))switch(showResponse(),a.body.command){case"forward":executeYoutubeFunction("seekBy",a.body.amount);break;case"backward":executeYoutubeFunction("seekBy",-a.body.amount);break;case"next":executeYoutubeFunction("nextVideo");}updateWatch()}});async function updateWatch(){const a=(0,_jquery.default)("h1.title").text(),b=window.location.href,c=await executeYoutubeFunction("getCurrentTime"),d=_lodash.default.get(["unknown","playing","paused","willplay"],(await executeYoutubeFunction("getPlayerState")),"unknown");_lodash.default.isEmpty(a)||chrome.runtime.sendMessage({request:"UPDATE_WATCH",body:{title:a,url:b,state:d,timestamp:c}},function(a){console.log(a)})}updateWatch(),setInterval(()=>{updateWatch()},1e4),window.addEventListener("popstate",()=>setTimeout(()=>updateWatch(),100));
 
 },{"../constants.js":3,"../generated/graphql/mutations.js":5,"jquery":1,"lodash":2}],5:[function(require,module,exports){
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.join=exports.command=exports.upsertWatch=void 0;const upsertWatch=`mutation UpsertWatch($title: String!, $url: String!, $timestamp: Float) {
-  upsertWatch(title: $title, url: $url, timestamp: $timestamp) {
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.join=exports.command=exports.upsertWatch=void 0;const upsertWatch=`mutation UpsertWatch(
+  $title: String!
+  $url: String!
+  $timestamp: Float
+  $state: String
+) {
+  upsertWatch(title: $title, url: $url, timestamp: $timestamp, state: $state) {
     id
     userId
     createdAt
     updatedAt
     title
     url
+    state
     timestamp
     command
     amount
   }
 }
-`;exports.upsertWatch="mutation UpsertWatch($title: String!, $url: String!, $timestamp: Float) {\n  upsertWatch(title: $title, url: $url, timestamp: $timestamp) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";const command=`mutation Command($command: String!, $amount: Float) {
+`;exports.upsertWatch="mutation UpsertWatch(\n  $title: String!\n  $url: String!\n  $timestamp: Float\n  $state: String\n) {\n  upsertWatch(title: $title, url: $url, timestamp: $timestamp, state: $state) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    state\n    timestamp\n    command\n    amount\n  }\n}\n";const command=`mutation Command($command: String!, $amount: Float) {
   command(command: $command, amount: $amount) {
     id
     userId
@@ -27517,12 +27523,13 @@ return jQuery;
     updatedAt
     title
     url
+    state
     timestamp
     command
     amount
   }
 }
-`;exports.command="mutation Command($command: String!, $amount: Float) {\n  command(command: $command, amount: $amount) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";const join=`mutation Join {
+`;exports.command="mutation Command($command: String!, $amount: Float) {\n  command(command: $command, amount: $amount) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    state\n    timestamp\n    command\n    amount\n  }\n}\n";const join=`mutation Join {
   join {
     id
     username

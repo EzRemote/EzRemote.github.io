@@ -101685,20 +101685,26 @@ if (hasSymbols()) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;const awsmobile={aws_appsync_graphqlEndpoint:"https://axlvk4nfzbf5fnfmpqo37uzdey.appsync-api.ap-northeast-2.amazonaws.com/graphql",aws_appsync_region:"ap-northeast-2",aws_appsync_authenticationType:"AMAZON_COGNITO_USER_POOLS",aws_appsync_apiKey:"null"};var _default=awsmobile;exports.default=_default;
 
 },{}],483:[function(require,module,exports){
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.join=exports.command=exports.upsertWatch=void 0;const upsertWatch=`mutation UpsertWatch($title: String!, $url: String!, $timestamp: Float) {
-  upsertWatch(title: $title, url: $url, timestamp: $timestamp) {
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.join=exports.command=exports.upsertWatch=void 0;const upsertWatch=`mutation UpsertWatch(
+  $title: String!
+  $url: String!
+  $timestamp: Float
+  $state: String
+) {
+  upsertWatch(title: $title, url: $url, timestamp: $timestamp, state: $state) {
     id
     userId
     createdAt
     updatedAt
     title
     url
+    state
     timestamp
     command
     amount
   }
 }
-`;exports.upsertWatch="mutation UpsertWatch($title: String!, $url: String!, $timestamp: Float) {\n  upsertWatch(title: $title, url: $url, timestamp: $timestamp) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";const command=`mutation Command($command: String!, $amount: Float) {
+`;exports.upsertWatch="mutation UpsertWatch(\n  $title: String!\n  $url: String!\n  $timestamp: Float\n  $state: String\n) {\n  upsertWatch(title: $title, url: $url, timestamp: $timestamp, state: $state) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    state\n    timestamp\n    command\n    amount\n  }\n}\n";const command=`mutation Command($command: String!, $amount: Float) {
   command(command: $command, amount: $amount) {
     id
     userId
@@ -101706,12 +101712,13 @@ if (hasSymbols()) {
     updatedAt
     title
     url
+    state
     timestamp
     command
     amount
   }
 }
-`;exports.command="mutation Command($command: String!, $amount: Float) {\n  command(command: $command, amount: $amount) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";const join=`mutation Join {
+`;exports.command="mutation Command($command: String!, $amount: Float) {\n  command(command: $command, amount: $amount) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    state\n    timestamp\n    command\n    amount\n  }\n}\n";const join=`mutation Join {
   join {
     id
     username
@@ -101729,12 +101736,13 @@ if (hasSymbols()) {
     updatedAt
     title
     url
+    state
     timestamp
     command
     amount
   }
 }
-`;exports.subscribeToUpdateWatch="subscription SubscribeToUpdateWatch {\n  subscribeToUpdateWatch {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";const subscribeToCommand=`subscription SubscribeToCommand {
+`;exports.subscribeToUpdateWatch="subscription SubscribeToUpdateWatch {\n  subscribeToUpdateWatch {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    state\n    timestamp\n    command\n    amount\n  }\n}\n";const subscribeToCommand=`subscription SubscribeToCommand {
   subscribeToCommand {
     id
     userId
@@ -101742,11 +101750,12 @@ if (hasSymbols()) {
     updatedAt
     title
     url
+    state
     timestamp
     command
     amount
   }
 }
-`;exports.subscribeToCommand="subscription SubscribeToCommand {\n  subscribeToCommand {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";
+`;exports.subscribeToCommand="subscription SubscribeToCommand {\n  subscribeToCommand {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    state\n    timestamp\n    command\n    amount\n  }\n}\n";
 
 },{}]},{},[481]);
