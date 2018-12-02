@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Ez Remote",
   "description": "This extension is a starting point to create a real Chrome extension",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "oauth2": {
     "client_id": "1053574179291-ih36ejj4gduf6km9jlad61iq80qgcsv8.apps.googleusercontent.com",
     "scopes":["profile"]
@@ -23,14 +23,13 @@
   },
   "options_page": "index.html",
   "icons": {
-    "16": "logo-small.svg",
-    "48": "logo-small.svg",
-    "128": "logo-small.svg"
+    "16": "logo-small.png",
+    "48": "logo-small.png",
+    "128": "logo-small.png"
   },
   "permissions": [
     "tabs",
     "http://*.youtube.com/", "https://*.youtube.com/", "identity",
     "https://ezmote.auth.ap-northeast-2.amazoncognito.com/*"
-
   ]
 }

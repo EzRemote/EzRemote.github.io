@@ -101713,13 +101713,12 @@ if (hasSymbols()) {
 }
 `;exports.command="mutation Command($command: String!, $amount: Float) {\n  command(command: $command, amount: $amount) {\n    id\n    userId\n    createdAt\n    updatedAt\n    title\n    url\n    timestamp\n    command\n    amount\n  }\n}\n";const join=`mutation Join {
   join {
-    cognitoId
     id
     username
     registered
   }
 }
-`;exports.join="mutation Join {\n  join {\n    cognitoId\n    id\n    username\n    registered\n  }\n}\n";
+`;exports.join="mutation Join {\n  join {\n    id\n    username\n    registered\n  }\n}\n";
 
 },{}],484:[function(require,module,exports){
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.subscribeToCommand=exports.subscribeToUpdateWatch=void 0;const subscribeToUpdateWatch=`subscription SubscribeToUpdateWatch {
