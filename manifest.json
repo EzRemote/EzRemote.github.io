@@ -3,10 +3,17 @@
   "manifest_version": 2,
   "name": "Ez Remote",
   "description": "This extension is a starting point to create a real Chrome extension",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "oauth2": {
     "client_id": "1053574179291-ih36ejj4gduf6km9jlad61iq80qgcsv8.apps.googleusercontent.com",
     "scopes":["profile"]
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "*://leo-lab.github.io/*",
+      "*://ezremote.github.io/*"
+    ]
   },
   "background": {
     "scripts": ["third_party/jquery.min.js", "background/index.js"]
@@ -18,8 +25,6 @@
     }
   ],
   "browser_action": {
-    "default_popup": "index.html",
-    "default_title": "Open the popup"
   },
   "options_page": "index.html",
   "icons": {
